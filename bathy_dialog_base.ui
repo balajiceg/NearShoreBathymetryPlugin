@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>649</width>
-    <height>370</height>
+    <width>733</width>
+    <height>451</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,9 +18,15 @@
     <rect>
      <x>23</x>
      <y>9</y>
-     <width>391</width>
-     <height>311</height>
+     <width>471</width>
+     <height>381</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
    </property>
    <property name="verticalScrollBarPolicy">
     <enum>Qt::ScrollBarAlwaysOn</enum>
@@ -32,23 +38,23 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>-241</y>
-      <width>372</width>
-      <height>550</height>
+      <y>-208</y>
+      <width>452</width>
+      <height>725</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
       <width>0</width>
-      <height>550</height>
+      <height>725</height>
      </size>
     </property>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>30</y>
-       <width>371</width>
+       <y>40</y>
+       <width>441</width>
        <height>51</height>
       </rect>
      </property>
@@ -78,7 +84,33 @@
        </rect>
       </property>
       <property name="text">
-       <string>D:/plugin/subset/blue.tif</string>
+       <string>C:/Users/administrator/Desktop/bathyData/sample_data.tif</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="blue_bn">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>20</y>
+        <width>42</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>20</y>
+        <width>31</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Band</string>
       </property>
      </widget>
     </widget>
@@ -86,8 +118,8 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>80</y>
-       <width>371</width>
+       <y>100</y>
+       <width>441</width>
        <height>51</height>
       </rect>
      </property>
@@ -117,46 +149,33 @@
        </rect>
       </property>
       <property name="text">
-       <string>D:/plugin/subset/green.tif</string>
+       <string>C:/Users/administrator/Desktop/bathyData/sample_data.tif</string>
       </property>
      </widget>
-    </widget>
-    <widget class="QGroupBox" name="groupBox_4">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>130</y>
-       <width>371</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Metadata file</string>
-     </property>
-     <widget class="QPushButton" name="meta_data_btn">
+     <widget class="QSpinBox" name="green_bn">
       <property name="geometry">
        <rect>
-        <x>280</x>
+        <x>390</x>
         <y>20</y>
-        <width>75</width>
-        <height>23</height>
+        <width>42</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>20</y>
+        <width>31</width>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>Browse</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="meta_data">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>261</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>D:/plugin/LC08_L1TP_139046_20170115_20170311_01_T1_MTL.txt</string>
+       <string>Band</string>
       </property>
      </widget>
     </widget>
@@ -164,8 +183,8 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>190</y>
-       <width>371</width>
+       <y>160</y>
+       <width>441</width>
        <height>51</height>
       </rect>
      </property>
@@ -175,7 +194,7 @@
      <widget class="QPushButton" name="shape_file_btn">
       <property name="geometry">
        <rect>
-        <x>280</x>
+        <x>350</x>
         <y>20</y>
         <width>75</width>
         <height>23</height>
@@ -190,51 +209,12 @@
        <rect>
         <x>10</x>
         <y>20</y>
-        <width>261</width>
+        <width>331</width>
         <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>D:/plugin/ground_truth/bathy2.shp</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QGroupBox" name="groupBox_6">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>240</y>
-       <width>371</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Output Directory</string>
-     </property>
-     <widget class="QPushButton" name="output_dir_btn">
-      <property name="geometry">
-       <rect>
-        <x>280</x>
-        <y>20</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Browse</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="output_dir">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>261</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>D:/plugin/output</string>
+       <string>C:/Users/administrator/Desktop/bathyData/ground_truth/bathy2.shp</string>
       </property>
      </widget>
     </widget>
@@ -242,9 +222,9 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>290</y>
-       <width>381</width>
-       <height>261</height>
+       <y>230</y>
+       <width>441</width>
+       <height>301</height>
       </rect>
      </property>
      <property name="title">
@@ -299,8 +279,8 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>50</y>
-        <width>371</width>
+        <y>40</y>
+        <width>441</width>
         <height>51</height>
        </rect>
       </property>
@@ -330,6 +310,32 @@
         </rect>
        </property>
       </widget>
+      <widget class="QSpinBox" name="red_bn">
+       <property name="geometry">
+        <rect>
+         <x>390</x>
+         <y>20</y>
+         <width>42</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>20</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Band</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_9">
       <property name="enabled">
@@ -339,7 +345,7 @@
        <rect>
         <x>0</x>
         <y>100</y>
-        <width>371</width>
+        <width>441</width>
         <height>51</height>
        </rect>
       </property>
@@ -355,6 +361,9 @@
          <height>23</height>
         </rect>
        </property>
+       <property name="toolTip">
+        <string/>
+       </property>
        <property name="text">
         <string>Browse</string>
        </property>
@@ -369,7 +378,42 @@
         </rect>
        </property>
        <property name="text">
-        <string>D:/plugin/subset/nir.tif</string>
+        <string>C:/Users/administrator/Desktop/bathyData/sample_data.tif</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_8">
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>20</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Band</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="nir_bn">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>390</x>
+         <y>20</y>
+         <width>42</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="statusTip">
+        <string/>
+       </property>
+       <property name="minimum">
+        <number>1</number>
        </property>
       </widget>
      </widget>
@@ -380,8 +424,8 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>150</y>
-        <width>371</width>
+        <y>160</y>
+        <width>441</width>
         <height>51</height>
        </rect>
       </property>
@@ -411,6 +455,32 @@
         </rect>
        </property>
       </widget>
+      <widget class="QLabel" name="label_9">
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>20</y>
+         <width>31</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Band</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="swir_bn">
+       <property name="geometry">
+        <rect>
+         <x>390</x>
+         <y>20</y>
+         <width>42</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_11">
       <property name="enabled">
@@ -419,8 +489,8 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>200</y>
-        <width>371</width>
+        <y>220</y>
+        <width>441</width>
         <height>51</height>
        </rect>
       </property>
@@ -451,23 +521,39 @@
        </property>
       </widget>
      </widget>
+     <widget class="QCheckBox" name="sieve">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>280</y>
+        <width>211</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Consider only the largest water body</string>
+      </property>
+     </widget>
     </widget>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="groupBox_12">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
-       <width>371</width>
-       <height>31</height>
+       <y>570</y>
+       <width>441</width>
+       <height>81</height>
       </rect>
      </property>
      <property name="title">
-      <string>Satellite</string>
+      <string/>
      </property>
      <widget class="QRadioButton" name="landsat7">
       <property name="geometry">
        <rect>
-        <x>120</x>
+        <x>70</x>
         <y>10</y>
         <width>82</width>
         <height>17</height>
@@ -483,7 +569,7 @@
      <widget class="QRadioButton" name="landsat8">
       <property name="geometry">
        <rect>
-        <x>260</x>
+        <x>150</x>
         <y>10</y>
         <width>82</width>
         <height>17</height>
@@ -493,14 +579,139 @@
        <string>Landsat 8</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>46</width>
+        <height>13</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Satellite</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="meta_data">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>50</y>
+        <width>331</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>C:/Users/administrator/Desktop/bathyData/mtl_file.txt</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="meta_data_btn">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>50</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Meta Data File</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_6">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>660</y>
+       <width>441</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Output Directory</string>
+     </property>
+     <widget class="QPushButton" name="output_dir_btn">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>20</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="output_dir">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>261</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>C:/Users/administrator/Desktop/bathyData/output</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QCheckBox" name="toa">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>550</y>
+       <width>141</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Convert DN to TOA</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>371</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Near Shore Bathymetry Estimation</string>
+     </property>
     </widget>
    </widget>
   </widget>
   <widget class="QPushButton" name="ok">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>330</y>
+     <x>320</x>
+     <y>400</y>
      <width>81</width>
      <height>23</height>
     </rect>
@@ -512,8 +723,8 @@
   <widget class="QPushButton" name="cancel">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>330</y>
+     <x>40</x>
+     <y>400</y>
      <width>82</width>
      <height>23</height>
     </rect>
@@ -525,10 +736,10 @@
   <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">
     <rect>
-     <x>420</x>
+     <x>510</x>
      <y>10</y>
      <width>221</width>
-     <height>341</height>
+     <height>381</height>
     </rect>
    </property>
    <property name="maximumSize">
@@ -599,25 +810,14 @@ p, li { white-space: pre-wrap; }
     </widget>
    </widget>
   </widget>
+  <zorder>scrollArea_2</zorder>
+  <zorder>ok</zorder>
+  <zorder>cancel</zorder>
+  <zorder>scrollArea</zorder>
+  <zorder>groupBox_11</zorder>
  </widget>
-
+ <resources/>
  <connections>
-  <connection>
-   <sender>custom</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>groupBox_11</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>307</x>
-     <y>113</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>302</x>
-     <y>290</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>ndwi</sender>
    <signal>toggled(bool)</signal>
@@ -679,6 +879,38 @@ p, li { white-space: pre-wrap; }
     <hint type="destinationlabel">
      <x>227</x>
      <y>241</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toa</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>groupBox_12</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>68</x>
+     <y>217</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>244</x>
+     <y>254</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>custom</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>groupBox_11</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>307</x>
+     <y>113</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>302</x>
+     <y>290</y>
     </hint>
    </hints>
   </connection>

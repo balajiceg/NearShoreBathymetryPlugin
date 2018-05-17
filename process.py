@@ -19,7 +19,7 @@ NDWI=2
 
 np.set_printoptions(threshold=np.inf)
 
-def read_data(filename):
+def read_data(filename,band_no=1):
     fileInfo = QFileInfo(filename)
     baseName = fileInfo.baseName()
     layer = QgsRasterLayer(filename, baseName)
@@ -28,7 +28,7 @@ def read_data(filename):
     ds = gdal.Open(filename)
     proj = ds.GetProjection()
     geotransform = ds.GetGeoTransform()
-    band = ds.GetRasterBand(1)
+    band = ds.GetRasterBand(band_no)
     no_dat= band.GetNoDataValue()
     array = np.array(band.ReadAsArray())
     XSize,YSize=(band.XSize,band.YSize)
@@ -63,26 +63,15 @@ def convert_toa_cor_reflec(data,meta_file,band_no):
     return TOA_ref
 
 
-
-# blue_file=r"C:\Users\Idiot\Desktop\lansat\subset\blue.tif"
-# green_file=r"C:\Users\Idiot\Desktop\lansat\subset\green.tif"
-# red_file=r"C:\Users\Idiot\Desktop\lansat\subset\red.tif"
-# nir_file=r"C:\Users\Idiot\Desktop\lansat\subset\nir.tif"
-# swir_file=r"C:\Users\Idiot\Desktop\lansat\subset\swir.tif"
-
-# meta_file=r"C:\Users\Idiot\Desktop\lansat\LC08_L1TP_139046_20170115_20170311_01_T1.tar\LC08_L1TP_139046_20170115_20170311_01_T1_MTL.txt"
-# output_dir=r"C:\Users\Idiot\Desktop\lansat\output"
-# shape_file=r"C:\Users\Idiot\Desktop\lansat\ground_truth\bathy2.shp"
-# mask=MNDWI_and_NDVI
-def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_dir,shape_file,mask,progdialog,satellite):
+def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_dir,shape_file,mask,progdialog,satellite,blue_bn,green_bn,red_bn,nir_bn,swir_bn):
     
+    #defining band number for landsat 7 and 8 for fetching from the mtl file
     #band nos
     BLUE_BAND=1
     GREEN_BAND=2
     RED_BAND=3
     NIR_BAND=4
-    SWIR_BAND=5
-    
+    SWIR_BAND=5   
     if satellite==8:
         [BLUE_BAND,GREEN_BAND,RED_BAND,NIR_BAND,SWIR_BAND]=[BLUE_BAND+1,GREEN_BAND+1,RED_BAND+1,NIR_BAND+1,SWIR_BAND+1]
     
@@ -92,23 +81,21 @@ def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_d
     #read meata file for conversion of DN to radiance and to reflectence
     file = open(meta_file, "r") 
     file_contents=file.read() 
-
-
     
         
     progdialog.setValue(5)
     progdialog.setLabelText("reading rasters...")   
     progdialog.setAutoClose(False)
     #reading raster
-    blue = read_data(blue_file)[0]
-    green = read_data(green_file)[0]
+    blue = read_data(blue_file,blue_bn)[0]
+    green = read_data(green_file,green_bn)[0]
 
     if nir_file is not None:
-        nir = read_data(nir_file)[0]
+        nir = read_data(nir_file,nir_bn)[0]
     if red_file is not None:
-        red=read_data(red_file)[0]
+        red=read_data(red_file,red_bn)[0]
     if swir_file is not None:
-        swir= read_data(swir_file)[0]
+        swir= read_data(swir_file,swir_bn)[0]
 
     #converting dn to  TOA reflectance
     blue=convert_toa_cor_reflec(blue,file_contents,BLUE_BAND);
@@ -140,9 +127,10 @@ def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_d
         elif mask==NDWI:
             mask=((green-nir)/(green+nir))>0
             mask=np.uint8(mask)
+        
+
         #sleving for largest water body
         #grouping [pixels]
-
         b=np.ones(shape=[3,3],dtype=np.uint8);
         mask, num_features = ndimage.measurements.label(mask,b)
         unique, counts = np.unique(mask, return_counts=True)
@@ -165,13 +153,12 @@ def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_d
     #finding relative depth    
     n=1000
     rel_depth=np.log(n*blue)/np.log(n*green)
-    #rel_depth_red=np.log(n*green)/np.log(n*red)
 
     
     progdialog.setValue(40)
     progdialog.setLabelText("Reading shape file...")
-    #read shape file and getdata
-    gt=read_data(green_file)[3]
+    #read shape file and getdata actual depth data
+    gt=read_data(green_file)[3] #getting geotransform
     vlayer = QgsVectorLayer(shape_file, "points", "ogr")
     fea=vlayer.getFeatures()
     lat=[]
@@ -191,19 +178,19 @@ def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_d
                 lat.append(p[1])
                 z.append(attrs[0])
                 rel_z.append(rel_depth[x,y])
-                #rel_z_red.append(rel_depth_red[x,y])
 
                 
     progdialog.setValue(50)
     progdialog.setLabelText("Performing regression...")
+    
     #performing regression
     reg=stats.linregress(rel_z,z)            
     m=reg[0]
     c=reg[1]
 
-    
     progdialog.setValue(70)
     progdialog.setLabelText("Computing actual depth...")
+    
     #actual depth computation
     depth=rel_depth*m+c
     
