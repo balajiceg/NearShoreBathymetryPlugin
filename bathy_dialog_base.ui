@@ -38,7 +38,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>-346</y>
+      <y>-308</y>
       <width>452</width>
       <height>725</height>
      </rect>
@@ -706,9 +706,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>10</y>
+       <y>0</y>
        <width>371</width>
-       <height>16</height>
+       <height>31</height>
       </rect>
      </property>
      <property name="font">
@@ -804,9 +804,13 @@
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:4px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Bathymetry using &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:5px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Landsat 7/8 data&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:5px; margin-bottom:1px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This plugin is used to estimate the near shore bathymetry.It uses the Log Ratio Transformation method. This tool uses a bottom albedo-independent Bathymetry algorithm developed by&lt;span style=&quot; font-style:italic;&quot;&gt; Stumpf and Holderied (2003)&lt;/span&gt;. The bottom albedo-independent nature of the algorithm means that sea floor covered with dark sea grass or bright sand is shown to be at the same depth when they are at the same depth.This bathymetry is resonable only between depths of 2 to 20m.&lt;/p&gt;
+&lt;p style=&quot; margin-top:5px; margin-bottom:1px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This plugin is used to estimate the near shore bathymetry.It uses the Log Ratio Transformation method. This tool uses a bottom albedo-independent Bathymetry algorithm developed by&lt;span style=&quot; font-style:italic;&quot;&gt; Stumpf and Holderied (2003)&lt;/span&gt;. The bottom albedo-independent nature of the algorithm means that sea floor covered with dark sea grass or bright sand is shown to be at the same depth when they are at the same depth.This bathymetry is resonable only between depths of 2 to 20m. This tool is similar to the Relative Water Depth tool in ENVI.&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:5px; margin-bottom:1px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:5px; margin-bottom:1px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Data required for the tool are:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:5px; margin-bottom:1px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1. Blue Band,Green Band -for computing the relative depths.&lt;/p&gt;
+&lt;p style=&quot; margin-top:5px; margin-bottom:1px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2. OPTIONAL: Red band, NIR band, SWIR band - for creating mask to extract water body.&lt;/p&gt;
+&lt;p style=&quot; margin-top:5px; margin-bottom:1px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3. Ground truth Shape file: a shape file with point features containing the actual depth information. &lt;/p&gt;
+&lt;p style=&quot; margin-top:5px; margin-bottom:1px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4. MetaDataFile(MLT) OPTIONAL: for converting DN value to TOA.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:5px; margin-bottom:1px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:5px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Meta data File:&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:5px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The meta datafile provided with the landsat data set is required for conversion of DN to TOA reflectance.The plugin itself converts the DN values to TOA reflectance.The meta data file is required in (.txt) format&lt;/p&gt;
@@ -814,10 +818,12 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:5px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;NDWI&lt;/span&gt;-Normalised Difference Water Index Mask(uses NIR and GREEN bands).&lt;/p&gt;
 &lt;p style=&quot; margin-top:5px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;MNDWI&lt;/span&gt;-Modified mask.It uses NDWI+MNDWI for masking .This mask can efficiently highlight even shallow water.The mask uses SWIR ,NIR and GREEN bands .Then NDVI mask is created to remove aquatic plantation reqion from the mask.&lt;/p&gt;
 &lt;p style=&quot; margin-top:5px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Custom&lt;/span&gt;-You can provide with a custom binary mask.&lt;/p&gt;
+&lt;p style=&quot; margin-top:5px; margin-bottom:1px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Consider only the largest water body&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:5px; margin-bottom:1px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt; If enabled,it removes small water bodies or sieve pixels while creating the mask to extract only the largest water body in the region.&lt;/p&gt;
 &lt;p style=&quot; margin-top:5px; margin-bottom:1px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Ground Truth&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:5px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The ground truth data is used to convert the computed relative depth to actual depth using rehression.The data must be a &lt;span style=&quot; font-weight:600;&quot;&gt;Shape file with point features and with the first attribute as its depth(positive) and must be in the same projection as the input rasters.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:5px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The ground truth data is used to convert the computed relative depth to actual depth using rehression.This must contains points with actual depth. The data must be a &lt;span style=&quot; font-weight:600;&quot;&gt;Shape file with point features and with the first attribute as its depth(positive) and must be in the same projection as the input rasters. &lt;/span&gt;If you just want to stop with the relative water depth, just give some dummpy data for this region with two or three points.&lt;/p&gt;
 &lt;p style=&quot; margin-top:5px; margin-bottom:1px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Output&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:5px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Four output files will be creates .A mask file,actual depth(.tif) file ,relative depth(.tif) file and a graph(.pdf) file thats shows the plot of regression and the regression R&lt;span style=&quot; vertical-align:super;&quot;&gt;2&lt;/span&gt; and standard error values. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:5px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Four output files will be created .A mask file,actual depth(.tif) file ,relative depth(.tif) file and a graph(.pdf) file thats shows the plot of regression and the regression R&lt;span style=&quot; vertical-align:super;&quot;&gt;2&lt;/span&gt; and standard error values.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
