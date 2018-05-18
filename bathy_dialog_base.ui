@@ -38,7 +38,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>-208</y>
+      <y>-346</y>
       <width>452</width>
       <height>725</height>
      </rect>
@@ -59,7 +59,7 @@
       </rect>
      </property>
      <property name="title">
-      <string>Blue Band (1st band in landsat7|2nd in landsat 8)</string>
+      <string>Blue Band</string>
      </property>
      <widget class="QPushButton" name="blue_btn">
       <property name="geometry">
@@ -124,7 +124,7 @@
       </rect>
      </property>
      <property name="title">
-      <string>Green Band (2|3)</string>
+      <string>Green Band</string>
      </property>
      <widget class="QPushButton" name="green_btn">
       <property name="geometry">
@@ -163,6 +163,9 @@
       </property>
       <property name="minimum">
        <number>1</number>
+      </property>
+      <property name="value">
+       <number>2</number>
       </property>
      </widget>
      <widget class="QLabel" name="label_3">
@@ -322,6 +325,9 @@
        <property name="minimum">
         <number>1</number>
        </property>
+       <property name="value">
+        <number>3</number>
+       </property>
       </widget>
       <widget class="QLabel" name="label_7">
        <property name="geometry">
@@ -350,7 +356,7 @@
        </rect>
       </property>
       <property name="title">
-       <string>NIR Band (4|5)</string>
+       <string>NIR Band</string>
       </property>
       <widget class="QPushButton" name="nir_btn">
        <property name="geometry">
@@ -415,6 +421,9 @@
        <property name="minimum">
         <number>1</number>
        </property>
+       <property name="value">
+        <number>4</number>
+       </property>
       </widget>
      </widget>
      <widget class="QGroupBox" name="groupBox_10">
@@ -430,7 +439,7 @@
        </rect>
       </property>
       <property name="title">
-       <string>SWIR Band (5|6)</string>
+       <string>SWIR Band</string>
       </property>
       <widget class="QPushButton" name="swir_btn">
        <property name="geometry">
@@ -479,6 +488,9 @@
        </property>
        <property name="minimum">
         <number>1</number>
+       </property>
+       <property name="value">
+        <number>5</number>
        </property>
       </widget>
      </widget>
@@ -532,6 +544,9 @@
       </property>
       <property name="text">
        <string>Consider only the largest water body</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
@@ -647,7 +662,7 @@
      <widget class="QPushButton" name="output_dir_btn">
       <property name="geometry">
        <rect>
-        <x>280</x>
+        <x>350</x>
         <y>20</y>
         <width>75</width>
         <height>23</height>
@@ -662,7 +677,7 @@
        <rect>
         <x>10</x>
         <y>20</y>
-        <width>261</width>
+        <width>331</width>
         <height>21</height>
        </rect>
       </property>
@@ -710,8 +725,8 @@
   <widget class="QPushButton" name="ok">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>400</y>
+     <x>350</x>
+     <y>410</y>
      <width>81</width>
      <height>23</height>
     </rect>
@@ -723,8 +738,8 @@
   <widget class="QPushButton" name="cancel">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>400</y>
+     <x>70</x>
+     <y>410</y>
      <width>82</width>
      <height>23</height>
     </rect>

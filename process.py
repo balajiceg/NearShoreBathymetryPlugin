@@ -30,7 +30,7 @@ def read_data(filename,band_no=1):
     geotransform = ds.GetGeoTransform()
     band = ds.GetRasterBand(band_no)
     no_dat= band.GetNoDataValue()
-    array = np.array(band.ReadAsArray())
+    array = np.array(band.ReadAsArray(),dtype=np.float32)
     XSize,YSize=(band.XSize,band.YSize)
     return array,no_dat,proj,geotransform,XSize,YSize 
 
@@ -63,25 +63,9 @@ def convert_toa_cor_reflec(data,meta_file,band_no):
     return TOA_ref
 
 
-def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_dir,shape_file,mask,progdialog,satellite,blue_bn,green_bn,red_bn,nir_bn,swir_bn):
-    
-    #defining band number for landsat 7 and 8 for fetching from the mtl file
-    #band nos
-    BLUE_BAND=1
-    GREEN_BAND=2
-    RED_BAND=3
-    NIR_BAND=4
-    SWIR_BAND=5   
-    if satellite==8:
-        [BLUE_BAND,GREEN_BAND,RED_BAND,NIR_BAND,SWIR_BAND]=[BLUE_BAND+1,GREEN_BAND+1,RED_BAND+1,NIR_BAND+1,SWIR_BAND+1]
-    
+def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_dir,shape_file,mask,progdialog,satellite,blue_bn,green_bn,red_bn,nir_bn,swir_bn,toa_conv_needed,sieve_largest_polygon):  
     #enable gdal Exception printing
     gdal.UseExceptions();
-
-    #read meata file for conversion of DN to radiance and to reflectence
-    file = open(meta_file, "r") 
-    file_contents=file.read() 
-    
         
     progdialog.setValue(5)
     progdialog.setLabelText("reading rasters...")   
@@ -97,16 +81,32 @@ def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_d
     if swir_file is not None:
         swir= read_data(swir_file,swir_bn)[0]
 
-    #converting dn to  TOA reflectance
-    blue=convert_toa_cor_reflec(blue,file_contents,BLUE_BAND);
-    green=convert_toa_cor_reflec(green,file_contents,GREEN_BAND);
 
-    if red_file is not None:
-        red=convert_toa_cor_reflec(red,file_contents,RED_BAND);
-    if nir_file is not None:
-        nir=convert_toa_cor_reflec(nir,file_contents,NIR_BAND);
-    if swir_file is not None:
-        swir=convert_toa_cor_reflec(swir,file_contents,SWIR_BAND);
+
+    #converting dn to  TOA reflectance
+    if toa_conv_needed:
+        #defining band number for landsat 7 and 8 for fetching from the mtl file
+        BLUE_BAND=1
+        GREEN_BAND=2
+        RED_BAND=3
+        NIR_BAND=4
+        SWIR_BAND=5   
+        if satellite==8:
+            [BLUE_BAND,GREEN_BAND,RED_BAND,NIR_BAND,SWIR_BAND]=[BLUE_BAND+1,GREEN_BAND+1,RED_BAND+1,NIR_BAND+1,SWIR_BAND+1]
+
+        #read meata file for conversion of DN to radiance and to reflectence
+        file = open(meta_file, "r") 
+        file_contents=file.read() 
+
+        blue=convert_toa_cor_reflec(blue,file_contents,BLUE_BAND);
+        green=convert_toa_cor_reflec(green,file_contents,GREEN_BAND);
+
+        if red_file is not None:
+            red=convert_toa_cor_reflec(red,file_contents,RED_BAND);
+        if nir_file is not None:
+            nir=convert_toa_cor_reflec(nir,file_contents,NIR_BAND);
+        if swir_file is not None:
+            swir=convert_toa_cor_reflec(swir,file_contents,SWIR_BAND);
 
     
     progdialog.setValue(10)
@@ -131,17 +131,18 @@ def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_d
 
         #sleving for largest water body
         #grouping [pixels]
-        b=np.ones(shape=[3,3],dtype=np.uint8);
-        mask, num_features = ndimage.measurements.label(mask,b)
-        unique, counts = np.unique(mask, return_counts=True)
-        #deleting no data counts
-        unique=np.delete(unique,0)
-        counts=np.delete(counts,0)
-        #find largest group
-        pos=np.argmax(counts)
-        mask[mask!=unique[pos]] =0
-        mask[mask!=0]=1
-        mask=np.uint8(mask)
+        if sieve_largest_polygon:
+            b=np.ones(shape=[3,3],dtype=np.uint8)
+            mask, num_features = ndimage.measurements.label(mask,b)
+            unique, counts = np.unique(mask, return_counts=True)
+            #deleting no data counts
+            unique=np.delete(unique,0)
+            counts=np.delete(counts,0)
+            #find largest group
+            pos=np.argmax(counts)
+            mask[mask!=unique[pos]] =0
+            mask[mask!=0]=1
+            mask=np.uint8(mask)
 
     #masking the required bands
     blue=mask*blue
@@ -157,6 +158,7 @@ def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_d
     
     progdialog.setValue(40)
     progdialog.setLabelText("Reading shape file...")
+    
     #read shape file and getdata actual depth data
     gt=read_data(green_file)[3] #getting geotransform
     vlayer = QgsVectorLayer(shape_file, "points", "ogr")
@@ -182,7 +184,9 @@ def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_d
                 
     progdialog.setValue(50)
     progdialog.setLabelText("Performing regression...")
-    
+    print(rel_z)
+    print("be")
+    print(z)
     #performing regression
     reg=stats.linregress(rel_z,z)            
     m=reg[0]
@@ -328,5 +332,4 @@ def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_d
     progdialog.setValue(101)
     progdialog.setLabelText("Completed.")
     progdialog.setCancelButtonText('Ok')
-#run_code(blue_file,green_file,meta_file,output_dir,None)
 

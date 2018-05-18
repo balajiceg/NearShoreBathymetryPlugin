@@ -356,11 +356,14 @@ class bathymetry:
         else:
             satellite=7
         
-        blue_bn=self.dlg.blue_bn.value();
-        green_bn=self.dlg.green_bn.value();
-        red_bn=self.dlg.red_bn.value();
-        nir_bn=self.dlg.nir_bn.value();
-        swir_bn=self.dlg.swir_bn.value();
+        blue_bn=self.dlg.blue_bn.value()
+        green_bn=self.dlg.green_bn.value()
+        red_bn=self.dlg.red_bn.value()
+        nir_bn=self.dlg.nir_bn.value()
+        swir_bn=self.dlg.swir_bn.value()
+
+        toa_conv_needed=self.dlg.toa.isChecked()
+        sieve_largest_polygon=self.dlg.sieve.isChecked()
 
 
         progdialog.setWindowModality(Qt.WindowModal)
@@ -368,13 +371,13 @@ class bathymetry:
 
         if self.dlg.ndwi.isChecked():
             mask=NDWI
-            run_code(self.blue_file,self.green_file,None,self.nir_file,None,self.meta_file,self.output_dir,self.shape_file,mask,progdialog,satellite,blue_bn,green_bn,red_bn,nir_bn,swir_bn)
+            run_code(self.blue_file,self.green_file,None,self.nir_file,None,self.meta_file,self.output_dir,self.shape_file,mask,progdialog,satellite,blue_bn,green_bn,red_bn,nir_bn,swir_bn,toa_conv_needed,sieve_largest_polygon)
         elif self.dlg.mndwi.isChecked():
             mask=MNDWI_and_NDVI
-            run_code(self.blue_file,self.green_file,self.red_file,self.nir_file,self.swir_file,self.meta_file,self.output_dir,self.shape_file,mask,progdialog,satellite,blue_bn,green_bn,red_bn,nir_bn,swir_bn)
+            run_code(self.blue_file,self.green_file,self.red_file,self.nir_file,self.swir_file,self.meta_file,self.output_dir,self.shape_file,mask,progdialog,satellite,blue_bn,green_bn,red_bn,nir_bn,swir_bn,toa_conv_needed,sieve_largest_polygon)
         else:
             mask=self.mask_file
-            run_code(self.blue_file,self.green_file,None,None,None,self.meta_file,self.output_dir,self.shape_file,mask,progdialog,satellite,blue_bn,green_bn,red_bn,nir_bn,swir_bn)
+            run_code(self.blue_file,self.green_file,None,None,None,self.meta_file,self.output_dir,self.shape_file,mask,progdialog,satellite,blue_bn,green_bn,red_bn,nir_bn,swir_bn,toa_conv_needed,sieve_largest_polygon)
     
    
         
