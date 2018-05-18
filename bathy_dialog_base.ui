@@ -38,7 +38,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>-308</y>
+      <y>0</y>
       <width>452</width>
       <height>725</height>
      </rect>
@@ -84,7 +84,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>C:/Users/administrator/Desktop/bathyData/sample_data.tif</string>
+       <string/>
       </property>
      </widget>
      <widget class="QSpinBox" name="blue_bn">
@@ -149,7 +149,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>C:/Users/administrator/Desktop/bathyData/sample_data.tif</string>
+       <string/>
       </property>
      </widget>
      <widget class="QSpinBox" name="green_bn">
@@ -217,7 +217,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>C:/Users/administrator/Desktop/bathyData/ground_truth/bathy2.shp</string>
+       <string/>
       </property>
      </widget>
     </widget>
@@ -384,7 +384,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>C:/Users/administrator/Desktop/bathyData/sample_data.tif</string>
+        <string/>
        </property>
       </widget>
       <widget class="QLabel" name="label_8">
@@ -617,7 +617,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>C:/Users/administrator/Desktop/bathyData/mtl_file.txt</string>
+       <string/>
       </property>
      </widget>
      <widget class="QPushButton" name="meta_data_btn">
@@ -682,7 +682,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>C:/Users/administrator/Desktop/bathyData/output</string>
+       <string/>
       </property>
      </widget>
     </widget>
@@ -823,7 +823,8 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:5px; margin-bottom:1px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Ground Truth&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:5px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The ground truth data is used to convert the computed relative depth to actual depth using rehression.This must contains points with actual depth. The data must be a &lt;span style=&quot; font-weight:600;&quot;&gt;Shape file with point features and with the first attribute as its depth(positive) and must be in the same projection as the input rasters. &lt;/span&gt;If you just want to stop with the relative water depth, just give some dummpy data for this region with two or three points.&lt;/p&gt;
 &lt;p style=&quot; margin-top:5px; margin-bottom:1px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Output&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:5px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Four output files will be created .A mask file,actual depth(.tif) file ,relative depth(.tif) file and a graph(.pdf) file thats shows the plot of regression and the regression R&lt;span style=&quot; vertical-align:super;&quot;&gt;2&lt;/span&gt; and standard error values.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:5px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Four output files will be created .A mask file,actual depth(.tif) file ,relative depth(.tif) file and a graph(.pdf) file thats shows the plot of regression and the regression R&lt;span style=&quot; vertical-align:super;&quot;&gt;2&lt;/span&gt; and standard error values.&lt;/p&gt;
+&lt;p style=&quot; margin-top:5px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;(A sample dataset is provided within the plugin repository. Please note that in the actual depth data in the ground truth is just for sample and are not the orginal values.)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -831,11 +832,6 @@ p, li { white-space: pre-wrap; }
     </widget>
    </widget>
   </widget>
-  <zorder>scrollArea_2</zorder>
-  <zorder>ok</zorder>
-  <zorder>cancel</zorder>
-  <zorder>scrollArea</zorder>
-  <zorder>groupBox_11</zorder>
  </widget>
  <resources/>
  <connections>

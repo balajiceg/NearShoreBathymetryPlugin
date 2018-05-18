@@ -7,17 +7,19 @@
 # This file should be included when you package your plugin.# Mandatory items:
 
 [general]
-name=Bathymetry using landsat 8
+name=Near Shore Bathymetry Estimator
 qgisMinimumVersion=2.0
-description=Estimate bbathymetry using land sat 8 images
-version=0.1
-author=Balaji
+description=Bathymetry determination using Multi Spectral Satellite imageries.
+version=1.0
+author=Balaji Ramesh
 email=balaji.9th@gmail.com
 
-about=This plugin is used to estimate approx depth between 2m to 20m using landsat 8 images.It requires input ground truth,landsat8 image and meta data file
+about=This plugin is used to estimate approx depth between 2m to 20m using multispectral satellite images.
+	It can estimate the actual depth provided actual depth of some field points are given as a shape file.
+	Without the actual data, it can estimate only the relative water depth.
 
-tracker=https://github.com/balajiceg/balajiceg.github.io
-repository=https://github.com/balajiceg/balajiceg.github.io
+tracker=https://github.com/balajiceg/NearShoreBathymetryPlugin/issues
+repository=https://github.com/balajiceg/NearShoreBathymetryPlugin
 # End of mandatory metadata
 
 # Recommended items:
@@ -26,9 +28,9 @@ repository=https://github.com/balajiceg/balajiceg.github.io
 # changelog=
 
 # Tags are comma separated with spaces allowed
-tags=
+tags=bathymetry , water depth, log ratio method
 
-homepage=
+homepage=https://github.com/balajiceg/NearShoreBathymetryPlugin
 category=Plugins
 icon=icon.png
 # experimental flag
