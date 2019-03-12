@@ -8,7 +8,7 @@
 
 [general]
 name=Near Shore Bathymetry Estimator
-qgisMinimumVersion=2.0
+qgisMinimumVersion=3.0
 description=Bathymetry determination using Multi Spectral Satellite imageries.
 version=1.0
 author=Balaji Ramesh
