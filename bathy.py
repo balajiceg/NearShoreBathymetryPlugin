@@ -20,13 +20,13 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-import resources
-from bathy_dialog import bathymetryDialog
+from qgis.PyQt.QtCore import *
+from qgis.PyQt.QtGui import *
+#import resources
+from .bathy_dialog import bathymetryDialog
 import os.path
 from osgeo import *
-from process import *
+from .process import *
 
 import numpy as np
 import gdal
@@ -177,11 +177,11 @@ class bathymetry:
             callback=self.run,
             parent=self.iface.mainWindow())
 		
-	QObject.connect(self.dlg.blue_btn,SIGNAL("clicked()"),self.Browseinputfileblue)
+        QObject.connect(self.dlg.blue_btn,SIGNAL("clicked()"),self.Browseinputfileblue)
         QObject.connect(self.dlg.green_btn,SIGNAL("clicked()"),self.Browseinputfilegreen)
         QObject.connect(self.dlg.meta_data_btn,SIGNAL("clicked()"),self.Browseinputmetafile)
         QObject.connect(self.dlg.output_dir_btn,SIGNAL("clicked()"),self.Browseoutputfile)
-	QObject.connect(self.dlg.ok,SIGNAL("clicked()"),self.go)
+        QObject.connect(self.dlg.ok,SIGNAL("clicked()"),self.go)
         QObject.connect(self.dlg.cancel,SIGNAL("clicked()"),self.close)
         QObject.connect(self.dlg.shape_file_btn,SIGNAL("clicked()"),self.Browseshapefile)
         QObject.connect(self.dlg.nir_btn,SIGNAL("clicked()"),self.Browseinputfilenir)

@@ -1,5 +1,5 @@
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from qgis.PyQt.QtCore import *
+from qgis.PyQt.QtGui import *
 from osgeo import *
 from qgis.core import *
 from qgis.gui import *
@@ -306,7 +306,7 @@ def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_d
     fcn.setColorRampType(QgsColorRampShader.INTERPOLATED)
     mmax=np.nanmax(depth)
     mmin=np.nanmin(depth)
-    print mmax
+    print(mmax)
     if mmax>20:
         mmax=20.00
     
@@ -328,7 +328,7 @@ def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_d
 
 
 
-    print "completed"
+    print("completed")
     progdialog.setValue(101)
     progdialog.setLabelText("Completed.")
     progdialog.setCancelButtonText('Ok')

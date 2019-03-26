@@ -23,13 +23,13 @@
 
 import os
 
-from PyQt4 import QtGui, uic
+from qgis.PyQt import QtWidgets, uic
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'bathy_dialog_base.ui'))
 
 
-class bathymetryDialog(QtGui.QDialog, FORM_CLASS):
+class bathymetryDialog(QtWidgets.QDialog, FORM_CLASS):
     def __init__(self, parent=None):
         """Constructor."""
         super(bathymetryDialog, self).__init__(parent)
