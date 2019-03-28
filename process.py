@@ -1,6 +1,6 @@
 from PyQt5.QtCore import QFileInfo
 from PyQt5.QtGui import QColor
-from osgeo import *
+from osgeo import osr
 from qgis.core import *
 from qgis.gui import *
 from qgis.utils import *
