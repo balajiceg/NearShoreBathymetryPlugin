@@ -1,5 +1,5 @@
-from qgis.PyQt.QtCore import *
-from qgis.PyQt.QtGui import *
+from PyQt5.QtCore import QFileInfo
+from PyQt5.QtGui import QColor
 from osgeo import *
 from qgis.core import *
 from qgis.gui import *
@@ -48,7 +48,7 @@ def get_value(contents,key):
     contents=contents.replace(' ','')
     # print float(contents)
     return float(contents)
-    
+
 def convert_toa_cor_reflec(data,meta_file,band_no):
     #OLI band data can also be converted to TOA planetary reflectance 
     #using reflectance rescaling coefficients
@@ -113,7 +113,7 @@ def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_d
     progdialog.setLabelText("Creating Mask...")
     #creating mask
     if type(mask)==str:
-        mask=read_data(mask)
+        mask=read_data(mask)[0]
         mask=np.uint8(mask)
     else:
         if mask==MNDWI_and_NDVI:
@@ -213,10 +213,10 @@ def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_d
 
     #########################################
     #removing layer from canvas
-    if len(QgsMapLayerRegistry.instance().mapLayers().values())>0:
-        for v in QgsMapLayerRegistry.instance().mapLayers().values():
+    if len(QgsProject.instance().mapLayers().values())>0:
+        for v in QgsProject.instance().mapLayers().values():
             if (v.id().find('actual')!=-1 or v.id().find('mask')!=-1 or v.id().find('relative')!=-1):
-                QgsMapLayerRegistry.instance().removeMapLayer(v.id())
+                QgsProject.instance().removeMapLayer(v.id())
                 
                 
     ##getting input raster data to set transformations
@@ -303,7 +303,7 @@ def run_code(blue_file,green_file,red_file,nir_file,swir_file,meta_file,output_d
     
     
     fcn = QgsColorRampShader()
-    fcn.setColorRampType(QgsColorRampShader.INTERPOLATED)
+    fcn.setColorRampType(QgsColorRampShader.Interpolated)
     mmax=np.nanmax(depth)
     mmin=np.nanmin(depth)
     print(mmax)

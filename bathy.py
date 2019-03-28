@@ -20,9 +20,12 @@
  *                                                                         *
  ***************************************************************************/
 """
-from qgis.PyQt.QtCore import *
-from qgis.PyQt.QtGui import *
-#import resources
+# from qgis.PyQt.QtCore import *
+# from qgis.PyQt.QtGui import *
+from PyQt5.QtCore import QSettings,QObject, QTranslator, qVersion, QCoreApplication
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QAction,QFileDialog,QProgressDialog
+from .resources import *
 from .bathy_dialog import bathymetryDialog
 import os.path
 from osgeo import *
@@ -70,10 +73,11 @@ class bathymetry:
 
         # Declare instance attributes
         self.actions = []
-        self.menu = self.tr(u'&Bathymetry using landsat 8')
+        self.menu = self.tr(u'&Near Shore Bathymetry')
         # TODO: We are going to let the user set this up in a future iteration
-        self.toolbar = self.iface.addToolBar(u'bathymetry')
-        self.toolbar.setObjectName(u'bathymetry')
+        self.first_start = None
+        # self.toolbar = self.iface.addToolBar(u'bathymetry')
+        # self.toolbar.setObjectName(u'bathymetry')
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -156,7 +160,7 @@ class bathymetry:
             action.setWhatsThis(whats_this)
 
         if add_to_toolbar:
-            self.toolbar.addAction(action)
+            self.iface.addToolBarIcon(action)
 
         if add_to_menu:
             self.iface.addPluginToMenu(
@@ -173,42 +177,33 @@ class bathymetry:
         icon_path = ':/plugins/bathymetry/icon.png'
         self.add_action(
             icon_path,
-            text=self.tr(u'Bathymetry landsat'),
+            text=self.tr(u'Near Shore Bathymetry'),
             callback=self.run,
             parent=self.iface.mainWindow())
-		
-        QObject.connect(self.dlg.blue_btn,SIGNAL("clicked()"),self.Browseinputfileblue)
-        QObject.connect(self.dlg.green_btn,SIGNAL("clicked()"),self.Browseinputfilegreen)
-        QObject.connect(self.dlg.meta_data_btn,SIGNAL("clicked()"),self.Browseinputmetafile)
-        QObject.connect(self.dlg.output_dir_btn,SIGNAL("clicked()"),self.Browseoutputfile)
-        QObject.connect(self.dlg.ok,SIGNAL("clicked()"),self.go)
-        QObject.connect(self.dlg.cancel,SIGNAL("clicked()"),self.close)
-        QObject.connect(self.dlg.shape_file_btn,SIGNAL("clicked()"),self.Browseshapefile)
-        QObject.connect(self.dlg.nir_btn,SIGNAL("clicked()"),self.Browseinputfilenir)
-        QObject.connect(self.dlg.swir_btn,SIGNAL("clicked()"),self.Browseinputfileswir)
-        QObject.connect(self.dlg.red_btn,SIGNAL("clicked()"),self.Browseinputfilered)
-        QObject.connect(self.dlg.mask_btn,SIGNAL("clicked()"),self.Browseinputfilemask)
+		       
         
+        self.first_start = True
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
             self.iface.removePluginMenu(
-                self.tr(u'&Bathymetry using landsat 8'),
+                self.tr(u'&Near Shore Bathymetry'),
                 action)
             self.iface.removeToolBarIcon(action)
-        # remove the toolbar
-        del self.toolbar
+
 
     def close(self):
         self.dlg.done(0) 
+
+
 
     def Browseinputfileblue(self):
         fd=QFileDialog()
         fd.setFileMode(QFileDialog.ExistingFile)
         ext_names=list()
         ext_names.append("*.TIFF *.TIF *.tif *.tiff")
-        fd.setFilters(ext_names)
+        fd.setNameFilters(ext_names)
         filenames = list()		
         if fd.exec_():
             filenames = fd.selectedFiles()
@@ -220,7 +215,7 @@ class bathymetry:
         fd.setFileMode(QFileDialog.ExistingFile)
         ext_names=list()
         ext_names.append("*.TIFF *.TIF *.tif *.tiff")
-        fd.setFilters(ext_names)
+        fd.setNameFilters(ext_names)
         filenames = list()		
         if fd.exec_():
             filenames = fd.selectedFiles()
@@ -232,7 +227,7 @@ class bathymetry:
         fd.setFileMode(QFileDialog.ExistingFile)
         ext_names=list()
         ext_names.append("*.TIFF *.TIF *.tif *.tiff")
-        fd.setFilters(ext_names)
+        fd.setNameFilters(ext_names)
         filenames = list()		
         if fd.exec_():
             filenames = fd.selectedFiles()
@@ -245,7 +240,7 @@ class bathymetry:
         fd.setFileMode(QFileDialog.ExistingFile)
         ext_names=list()
         ext_names.append("*.TIFF *.TIF *.tif *.tiff")
-        fd.setFilters(ext_names)
+        fd.setNameFilters(ext_names)
         filenames = list()		
         if fd.exec_():
             filenames = fd.selectedFiles()
@@ -257,7 +252,7 @@ class bathymetry:
         fd.setFileMode(QFileDialog.ExistingFile)
         ext_names=list()
         ext_names.append("*.TIFF *.TIF *.tif *.tiff")
-        fd.setFilters(ext_names)
+        fd.setNameFilters(ext_names)
         filenames = list()		
         if fd.exec_():
             filenames = fd.selectedFiles()
@@ -269,7 +264,7 @@ class bathymetry:
         fd.setFileMode(QFileDialog.ExistingFile)
         ext_names=list()
         ext_names.append("*.TIFF *.TIF *.tif *.tiff")
-        fd.setFilters(ext_names)
+        fd.setNameFilters(ext_names)
         filenames = list()		
         if fd.exec_():
             filenames = fd.selectedFiles()
@@ -286,7 +281,7 @@ class bathymetry:
         ext_names=list()
         ext_names.append("*.txt *.TXT")
         
-        fd.setFilters(ext_names)
+        fd.setNameFilters(ext_names)
         filenames = list()		
         if fd.exec_():
             filenames = fd.selectedFiles()
@@ -311,6 +306,7 @@ class bathymetry:
         fd.setFileMode(QFileDialog.ExistingFile)
         ext_names=list()
         ext_names.append("*.shp *.SHP")
+        fd.setNameFilters(ext_names)
         filenames = list()		
         if fd.exec_():
             filenames = fd.selectedFiles()
@@ -320,6 +316,21 @@ class bathymetry:
     def run(self):
         """Run method that performs all the real work"""
         # show the dialog
+        if self.first_start == True:
+            self.first_start = False
+            self.dlg = bathymetryDialog()
+            self.dlg.blue_btn.clicked.connect(self.Browseinputfileblue)
+            self.dlg.green_btn.clicked.connect(self.Browseinputfilegreen)
+            self.dlg.meta_data_btn.clicked.connect(self.Browseinputmetafile)
+            self.dlg.output_dir_btn.clicked.connect(self.Browseoutputfile)
+            self.dlg.ok.clicked.connect(self.go)
+            self.dlg.cancel.clicked.connect(self.close)
+            self.dlg.shape_file_btn.clicked.connect(self.Browseshapefile)
+            self.dlg.nir_btn.clicked.connect(self.Browseinputfilenir)
+            self.dlg.swir_btn.clicked.connect(self.Browseinputfileswir)
+            self.dlg.red_btn.clicked.connect(self.Browseinputfilered)
+            self.dlg.mask_btn.clicked.connect(self.Browseinputfilemask)
+     
         self.dlg.label.setStyleSheet("background: white")
         self.dlg.label.setWordWrap(True);
         self.dlg.show()
@@ -366,7 +377,7 @@ class bathymetry:
         sieve_largest_polygon=self.dlg.sieve.isChecked()
 
 
-        progdialog.setWindowModality(Qt.WindowModal)
+        # progdialog.setWindowModality(Qt.WindowModal)
         progdialog.show()
 
         if self.dlg.ndwi.isChecked():
