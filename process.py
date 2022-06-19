@@ -5,7 +5,7 @@ from qgis.core import *
 from qgis.gui import *
 from qgis.utils import *
 import numpy as np
-import gdal
+from osgeo import gdal
 from osgeo.gdalconst import *
 import math
 import os

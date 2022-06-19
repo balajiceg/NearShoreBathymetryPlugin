@@ -28,7 +28,7 @@ from PyQt5.QtWidgets import QAction,QFileDialog,QProgressDialog
 from .resources import *
 from .bathy_dialog import bathymetryDialog
 import os.path
-from osgeo import *
+from osgeo import gdal
 from .process import *
 
 import numpy as np
