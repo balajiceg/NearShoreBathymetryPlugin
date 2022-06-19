@@ -28,11 +28,11 @@ from PyQt5.QtWidgets import QAction,QFileDialog,QProgressDialog
 from .resources import *
 from .bathy_dialog import bathymetryDialog
 import os.path
-from osgeo import gdal
+from osgeo import *
 from .process import *
 
 import numpy as np
-import gdal
+from osgeo import gdal
 from osgeo.gdalconst import *
 import math
 from scipy import ndimage,stats
