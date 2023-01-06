@@ -1,3 +1,4 @@
+Please send me an email at balaji.9th@gmail.com if you run into issues.
 # Plugin for estimating Bathymetry using Multisepectral Satellite Data
 This plugin is used to estimate the near shore bathymetry.It uses the Log Ratio Transformation method. This tool uses a bottom albedo-independent Bathymetry algorithm developed by Stumpf and Holderied (2003). The bottom albedo-independent nature of the algorithm means that sea floor covered with dark sea grass or bright sand is shown to be at the same depth when they are at the same depth.This bathymetry is resonable only between depths of 2 to 20m. This tool is similar to the Relative Water Depth tool in ENVI.
 
